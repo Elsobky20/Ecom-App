@@ -8,7 +8,7 @@ using Ecom.core.Interfaces;
 
 namespace Ecom.core.Interfaces
 {
-    public interface ICategoryRepository: IGenericRepository<Category>
+    public interface ICategoryRepository: IGenericRepository<Photo>
     {
         //for futuer methods
     }

@@ -17,12 +17,12 @@ namespace Ecom.infrastructure.Data.Config
             builder.Property(p => p.Name).IsRequired().HasMaxLength(30);
 
             builder.Property(p => p.Id).IsRequired() ;
+
+
             builder.HasData(
-                new Category { Id = 1, Name = "Electronics", Description = "Electronic Items" },
-                new Category { Id = 2, Name = "Clothes", Description = "Clothes Items" }
-                );
-
-
+            new Category { Id = 1, Name = "Electronics", Description = "Electronic Devices" },
+            new Category { Id = 2, Name = "Clothing", Description = "Fashion & Clothing" }
+        );
         }
     }
 }

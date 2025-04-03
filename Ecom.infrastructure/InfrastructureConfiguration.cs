@@ -26,8 +26,7 @@ namespace Ecom.infrastructure
             services.AddDbContext<AppDbContext>(op =>
             {
                 op.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-
-                    
+    
             });
             return services;
         }
