@@ -15,6 +15,14 @@ namespace Ecom.API.Mapping
 
             CreateMap<Product,PhotoDTO>()
                 .ForMember(dest => dest.ImageName, opt => opt.MapFrom(src => src.Photos.FirstOrDefault().ImageName)).ReverseMap();
+
+            CreateMap<AddProductDTO, Product>()
+                .ForMember(x => x.Photos, x => x.Ignore())
+                .ReverseMap();
+
+            CreateMap<UpdateProductDTO, Product>()
+                .ForMember(x => x.Photos, x => x.Ignore())
+                .ReverseMap();
         }
     }
 }

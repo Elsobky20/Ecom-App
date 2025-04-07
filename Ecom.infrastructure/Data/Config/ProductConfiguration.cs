@@ -15,12 +15,12 @@ namespace Ecom.infrastructure.Data.Config
         {
             builder.Property(p => p.Name).IsRequired().HasMaxLength(30);
             builder.Property(p => p.Description).IsRequired().HasMaxLength(100);
-            builder.Property(p => p.Price).IsRequired();
+            builder.Property(p => p.NewPrice).IsRequired();
             builder.HasData(
-                new Product { Id = 1, Name = "Laptop", Description = "Dell Laptop", Price = 50000, CategoryId = 1 },
-                new Product { Id = 2, Name = "Mobile", Description = "Samsung Mobile", Price = 20000, CategoryId = 1 },
-                new Product { Id = 3, Name = "Shirt", Description = "Peter England Shirt", Price = 1000, CategoryId = 2 },
-                new Product { Id = 4, Name = "T-Shirt", Description = "Polo T-Shirt", Price = 500, CategoryId = 2 }
+                new Product { Id = 1, Name = "Laptop", Description = "Dell Laptop", NewPrice = 50000, CategoryId = 1 },
+                new Product { Id = 2, Name = "Mobile", Description = "Samsung Mobile", NewPrice = 20000, CategoryId = 1 },
+                new Product { Id = 3, Name = "Shirt", Description = "Peter England Shirt", NewPrice = 1000, CategoryId = 2 },
+                new Product { Id = 4, Name = "T-Shirt", Description = "Polo T-Shirt", NewPrice   = 500, CategoryId = 2 }
                 );
         }
     }

@@ -14,7 +14,7 @@ namespace Ecom.infrastructure.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-        public virtual DbSet<Photo> Categories { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Product> Products  { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Ecom.API.Helper;
 using Ecom.core.DTO;
+using Ecom.core.Entites.Product;
 using Ecom.core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -49,6 +50,50 @@ namespace Ecom.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPost("Add-Product")]
+        public async Task<IActionResult> AddProduct([FromForm] AddProductDTO productDTO)
+        {
+            try
+            {
+               await work.productRepository.AddAsync(productDTO);
+                return Ok(new ResponseAPI(200));
+
+            } 
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPut("Update-Product")]
+        public async Task<IActionResult> UpdateProduct([FromForm] UpdateProductDTO productDTO)
+        {
+            try
+            {
+                await work.productRepository.UpdateAsync(productDTO);
+                return Ok(new ResponseAPI(200));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpDelete("Delete-Product/{Id}")] 
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var product = await work.productRepository.GetByIdAsync(id , x=>x.Photos , x=>x.Category);
+                await work.productRepository.DeleteAsync(product);
+                return Ok(new ResponseAPI(200));
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
 
     }
 }
