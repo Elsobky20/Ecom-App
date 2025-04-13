@@ -3,8 +3,10 @@ using Ecom.core.DTO;
 using Ecom.core.Entites.Product;
 using Ecom.core.Interfaces;
 using Ecom.core.Services;
+using Ecom.core.Sharing;
 using Ecom.infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +27,44 @@ namespace Ecom.infrastructure.Repositories
             this.mapper = mapper;
             this.imageManagemntServce = imageManagemntServce;
         }
+        public async Task<IEnumerable<ProductDTO>> GetAllAsync(ProductParams productParams  )
+        {
+            var query = context.Products
+                .Include(x => x.Category)
+                .Include(x => x.Photos)
+                .AsNoTracking();
 
+            //filtering by word
+            if (!string.IsNullOrEmpty(productParams.Search))
+            {
+                var searchWords = productParams.Search.Split(' ');
+                query = query.Where(x => searchWords.All(word =>
+                x.Name.ToLower().Contains(word.ToLower()) 
+                || x.Description.ToLower().Contains(word.ToLower())));
+            }
+
+            //filter by categoryID
+            if (productParams.CategoryId.HasValue)
+            {
+                query = query.Where(x => x.CategoryId == productParams.CategoryId);
+            }
+
+            if (!string.IsNullOrEmpty(productParams.Sort)) 
+            {
+                query = productParams.Sort switch
+                {
+                    "PriceAce" => query.OrderBy(x => x.NewPrice),
+                    "PriceDce" => query.OrderByDescending(x => x.NewPrice),
+                    _ => query.OrderBy(x => x.Name),
+                };
+            }
+            //pagenation must be last one 
+           
+            query = query.Skip((productParams.PageNumber - 1) * productParams.PageSize).Take(productParams.PageSize);
+
+            var result = mapper.Map<List<ProductDTO>>(query);
+            return result;
+        }
         public async Task<bool> AddAsync(AddProductDTO productDTO)
         {
             if (productDTO == null) return false;
