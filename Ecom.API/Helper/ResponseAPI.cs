@@ -10,6 +10,9 @@
         public int StatusCode { get; set; }
         public string? Message { get; set; }
 
+
+
+
         private string GetmessageFromStatusCode(int statusCode)
         {
             return statusCode switch
