@@ -20,7 +20,7 @@ namespace Ecom.API.Controllers
         {
             try
             {
-                var categories = await work.categoryRepository.GetAllAsync();
+                IReadOnlyList<Category>? categories = await work.categoryRepository.GetAllAsync();
                 if (categories == null || categories.Count == 0)
                 {
                     return BadRequest(new ResponseAPI(400));
@@ -59,7 +59,7 @@ namespace Ecom.API.Controllers
                 {
                     return BadRequest(new ResponseAPI(400));
                 }
-                var category = mapper.Map<Photo>(categoryDTO);
+                var category = mapper.Map<Category>(categoryDTO);
 
                 await work.categoryRepository.AddAsync(category);
                 return Ok(new ResponseAPI(200 , "Item has been Added"));

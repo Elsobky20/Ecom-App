@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ecom.infrastructure.Repositories
 {
-   public class CategoryRepository:GenericRepository<Photo> , ICategoryRepository
+   public class CategoryRepository:GenericRepository<Category> , ICategoryRepository
     {
         public CategoryRepository(AppDbContext context):base(context)
         {
