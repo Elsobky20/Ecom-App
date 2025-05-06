@@ -27,7 +27,12 @@ namespace Ecom.core.DTO
         public int ProductId { get; set; }
 
     }
+    public record ReturnProductDTO
+    {
+        public List<ProductDTO> Products { get; set; }
+        public int TotalCount { get; set; }
 
+    }
     public record AddProductDTO
     {
         public string Name { get; set; }

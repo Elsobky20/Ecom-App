@@ -64,7 +64,7 @@ namespace Ecom.API.Middleware
 
             if (DateNaw-timespan <_rateLimitWindow) //if true that mean that is not first requesr
             {
-                if (count>8) //number of request >8
+                if (count>25) //number of request >25
                 {
                     return false; // Block request
                 }

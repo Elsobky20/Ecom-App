@@ -45,10 +45,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseCors("AllowAll");
+app.UseStaticFiles();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseStatusCodePagesWithReExecute("/Errors/{0}");
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+
 
 app.UseAuthorization();
 
