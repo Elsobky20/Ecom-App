@@ -12,7 +12,7 @@ namespace Ecom.core.Sharing
         public int? CategoryId { get; set; }
         public string? Search { get; set; }
         public int PageNumber { get; set; } = 1;
-        public int MaxPageSize { get; set; } = 6;
+        private  int MaxPageSize { get; set; } = 6;
         private int _pageSize = 3;
         public int PageSize
         {
