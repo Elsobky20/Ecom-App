@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Ecom.core.Services;
 using Ecom.infrastructure.Repositories.Service;
 using Microsoft.Extensions.FileProviders;
+using StackExchange.Redis;
 
 namespace Ecom.infrastructure
 {
@@ -28,6 +29,15 @@ namespace Ecom.infrastructure
             {
                 op.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 
+            });
+            //apply Redis connection
+            services.AddSingleton<IConnectionMultiplexer>(i =>
+            {
+                var config = ConfigurationOptions.Parse(configuration.GetConnectionString("redis"));
+                config.AbortOnConnectFail = false;
+                config.AsyncTimeout = 10000;
+                config.SyncTimeout = 10000;
+                return ConnectionMultiplexer.Connect(config);
             });
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
