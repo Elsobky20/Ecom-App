@@ -15,7 +15,8 @@ namespace Ecom.infrastructure.Data.Config
         {
             builder.Property(p => p.Name).IsRequired().HasMaxLength(30);
             builder.Property(p => p.Description).IsRequired().HasMaxLength(100);
-            builder.Property(p => p.NewPrice).IsRequired();
+            builder.Property(p => p.NewPrice).HasColumnType("decimal(18,12)");
+            builder.Property(p => p.OldPrice).HasColumnType("decimal(18,12)");
             builder.HasData(
                 new Product { Id = 1, Name = "Laptop", Description = "Dell Laptop", NewPrice = 50000, CategoryId = 1 },
                 new Product { Id = 2, Name = "Mobile", Description = "Samsung Mobile", NewPrice = 20000, CategoryId = 1 },
