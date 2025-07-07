@@ -47,11 +47,15 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowAll");
 app.UseStaticFiles();
 app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseStatusCodePagesWithReExecute("/Errors/{0}");
 app.UseHttpsRedirection();
 
 
-app.UseAuthorization();
+
 
 app.MapControllers();
 
