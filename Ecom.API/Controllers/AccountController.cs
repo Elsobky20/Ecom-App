@@ -52,7 +52,7 @@ namespace Ecom.API.Controllers
             return Ok(new ResponseAPI(200, result));
         }
 
-        [HttpPost("active-acount")]
+        [HttpPost("active-account")]
         public async Task<IActionResult> Active(ActiveAccountDTO activeAccountDTO)
         {
             if (activeAccountDTO == null)
