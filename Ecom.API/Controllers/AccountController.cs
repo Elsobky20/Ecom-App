@@ -2,6 +2,7 @@
 using Ecom.API.Helper;
 using Ecom.core.DTO;
 using Ecom.core.Interfaces;
+using Ecom.infrastructure.Data.Migrations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -76,6 +77,20 @@ namespace Ecom.API.Controllers
                 return BadRequest(new ResponseAPI(400, "Active Account Failed"));
             }
             return Ok(new ResponseAPI(200, "Active Account Successfully"));
-        }  
+        }
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> reset(ResetPasswordDTO passwordDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await work.Auth.ResetPassword(passwordDTO);
+                if (result != "Reset password successful")
+                {
+                    return BadRequest(new ResponseAPI(400, result));
+                }
+                return Ok(new ResponseAPI(200, result));
+            }
+            return BadRequest(new ResponseAPI(400, "Model is not Valid"));
+        }
     }
 }

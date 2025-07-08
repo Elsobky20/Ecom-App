@@ -40,8 +40,8 @@ namespace Ecom.infrastructure.Repositories.Service
                            true);
                     //login
                     await smtp.AuthenticateAsync(
-                        _configuration["EmailSetting:ahmedelsobky630@gmail.com"],
-                        _configuration["EmailSetting:xkqnsvjmacxjrinf"]
+                       _configuration["EmailSetting:UserName"],
+    _configuration["EmailSetting:Password"]
                         );
                     //send message
                     await smtp.SendAsync(Message);
