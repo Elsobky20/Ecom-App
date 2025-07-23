@@ -4,6 +4,7 @@ using Ecom.infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecom.infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250713083132_Order_Tables")]
+    partial class Order_Tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,32 +164,6 @@ namespace Ecom.infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DeliveryMethods");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DeliveryTime = "3-5 days",
-                            Description = "Delivered in 3-5 business days",
-                            Name = "Standard Delivery",
-                            Price = 5.00m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DeliveryTime = "1-2 days",
-                            Description = "Delivered in 1-2 business days",
-                            Name = "Express Delivery",
-                            Price = 10.00m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DeliveryTime = "Next day",
-                            Description = "Delivered the next business day",
-                            Name = "Next Day Delivery",
-                            Price = 20.00m
-                        });
                 });
 
             modelBuilder.Entity("Ecom.core.Entites.Order.OrderItem", b =>

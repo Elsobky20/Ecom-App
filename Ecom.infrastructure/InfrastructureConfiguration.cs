@@ -49,6 +49,7 @@ namespace Ecom.infrastructure
 
             //Register Email sender 
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddSingleton<IImageManagemntServce, ImageManagemntServce>();
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));

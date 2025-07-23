@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Ecom.core.Entites;
+using StackExchange.Redis;
+using Ecom.core.Entites.Order;
 
 namespace Ecom.infrastructure.Data
 {
@@ -20,6 +22,10 @@ namespace Ecom.infrastructure.Data
         public virtual DbSet<Product> Products  { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
+
+        public virtual DbSet<DeliveryMethod> DeliveryMethods { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
