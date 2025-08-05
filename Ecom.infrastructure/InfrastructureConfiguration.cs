@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Ecom.core.Entites;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace Ecom.infrastructure
 {
@@ -68,10 +69,12 @@ namespace Ecom.infrastructure
             {
                 op.DefaultAuthenticateScheme  =JwtBearerDefaults.AuthenticationScheme;
                 op.DefaultChallengeScheme =JwtBearerDefaults.AuthenticationScheme;  
-                op.DefaultScheme =CookieAuthenticationDefaults.AuthenticationScheme;
+                op.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddCookie(o =>
             {
                 o.Cookie.Name = "token";
+                o.Cookie.SameSite = SameSiteMode.None;
+                o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 o.Events.OnRedirectToLogin = context =>
                 {
                     context.Response.StatusCode = 401; // Unauthorized
@@ -96,7 +99,7 @@ namespace Ecom.infrastructure
                     {
                       context.Token = context.Request.Cookies["token"];
                         return Task.CompletedTask;
-                    }
+                    }   
                 };
             });
 

@@ -48,7 +48,7 @@ namespace Ecom.infrastructure.Repositories
             productRepository = new ProductRepository(this.context, this.mapper, this.imageManagemntServce);
             photoRepository = new PhotoRepository(this.context);
             CustomerBasket = new CustomerBasketRepository(this.redis);
-            Auth = new AuthRepository(userManager, emailService, signInManager , token);
+            Auth = new AuthRepository(userManager, emailService, signInManager , token , context );
             
         }
 
